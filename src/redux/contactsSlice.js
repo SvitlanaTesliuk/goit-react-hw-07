@@ -1,7 +1,7 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./contactsOps";
 
-// Селектори
+
 export const selectContacts = (state) => state.contacts.items;
 export const selectFilter = (state) => state.filters.name;
 
@@ -15,7 +15,7 @@ export const selectFilteredContacts = createSelector(
   }
 );
 
-// Слайс
+
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
@@ -25,7 +25,7 @@ const contactsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Обробка fetchContacts
+     
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -38,11 +38,11 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Обробка addContact
+      
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
-      // Обробка deleteContact
+     
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.items = state.items.filter((contact) => contact.id !== action.payload);
       });
